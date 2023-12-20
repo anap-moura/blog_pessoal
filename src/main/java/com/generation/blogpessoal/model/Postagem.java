@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -30,6 +33,16 @@ public class Postagem {
 	
 	@UpdateTimestamp
 	private LocalDateTime data;
+	
+	 @ManyToOne /* indica que a Classe Postagem será o lado N:1 e terá um Objeto da Classe Tema, 
+	 que no modelo Relacional será a Chave Estrangeira na Tabela tb_postagens (tema_id) */
+		@JsonIgnoreProperties("postagem") /*  A anotação @JsonIgnoreProperties indica que uma parte do JSON será ignorado, ou seja, 
+		como a Relação entre as Classes será do tipo Bidirecional, ao listar o Objeto Postagem numa consulta, 
+		por exemplo, o Objeto Tema, que será criado na linha 39, será exibido como um "Sub Objeto" do Objeto Postagem, 
+	devido ao Relacionamento que foi criado.
+
+{*/
+		private Tema tema;
 
 	public Long getId() {
 		return id;
@@ -61,6 +74,14 @@ public class Postagem {
 
 	public void setData(LocalDateTime data) {
 		this.data = data;
+	}
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 	
 	

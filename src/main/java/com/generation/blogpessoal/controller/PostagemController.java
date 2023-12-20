@@ -35,7 +35,7 @@ public class PostagemController {
 		return ResponseEntity.ok(postagemRepository.findAll());
 	}
 	
-	@GetMapping("/{id}") //sql== SELECT * FROM tb_postagens where id = id;
+	@GetMapping("/{id}") //mysql == SELECT * FROM tb_postagens where id = id;
 	public ResponseEntity<Postagem> getById(@PathVariable Long id){
 		return postagemRepository.findById(id)
 				.map(resp -> ResponseEntity.ok(resp))
