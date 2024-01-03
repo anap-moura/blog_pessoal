@@ -34,14 +34,8 @@ public class Postagem {
 	@UpdateTimestamp
 	private LocalDateTime data;
 	
-	 @ManyToOne /* indica que a Classe Postagem será o lado N:1 e terá um Objeto da Classe Tema, 
-	 que no modelo Relacional será a Chave Estrangeira na Tabela tb_postagens (tema_id) */
-		@JsonIgnoreProperties("postagem") /*  A anotação @JsonIgnoreProperties indica que uma parte do JSON será ignorado, ou seja, 
-		como a Relação entre as Classes será do tipo Bidirecional, ao listar o Objeto Postagem numa consulta, 
-		por exemplo, o Objeto Tema, que será criado na linha 39, será exibido como um "Sub Objeto" do Objeto Postagem, 
-	devido ao Relacionamento que foi criado.
-
-{*/
+	@ManyToOne 
+	@JsonIgnoreProperties("postagem") 
 		private Tema tema;
 
 	public Long getId() {
